@@ -175,7 +175,7 @@ class GraphPredictionTask(FairseqTask):
     def load_dataset(self, split, combine=False, **kwargs):
         """Load a given dataset split (e.g., train, valid, test)."""
 
-        assert split in ["train", "valid", "test"]
+        assert split in ["train", "valid", "test", "challenge"]
 
         if split == "train":
             batched_data = self.dm.dataset_train
@@ -183,6 +183,8 @@ class GraphPredictionTask(FairseqTask):
             batched_data = self.dm.dataset_val
         elif split == "test":
             batched_data = self.dm.dataset_test
+        elif split == "challenge":
+            batched_data = self.dm.dataset_challenge
 
         batched_data = BatchedDataDataset(batched_data,
             dataset_version="2D" if self.cfg.dataset_name == 'PCQM4M-LSC-V2' else "3D",

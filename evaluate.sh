@@ -10,6 +10,7 @@ ulimit -c unlimited
 [ -z "${clip_norm}" ] && clip_norm=5
 [ -z "${data_path}" ] && data_path='./datasets/'
 [ -z "${save_path}" ] && save_path='./logs/path_to_ckpts/'
+[ -z "${split}" ] && split='train'
 [ -z "${dropout}" ] && dropout=0.0
 [ -z "${act_dropout}" ] && act_dropout=0.1
 [ -z "${attn_dropout}" ] && attn_dropout=0.1
@@ -25,6 +26,7 @@ ulimit -c unlimited
 [ -z "${num_3d_bias_kernel}" ] && num_3d_bias_kernel=128
 
 python evaluate.py \
+	--split $split \
 	--user-dir $(realpath ./Transformer-M) \
 	--data-path $data_path \
 	--num-workers 16 --ddp-backend=legacy_ddp \

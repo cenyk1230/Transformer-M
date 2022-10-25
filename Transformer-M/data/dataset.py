@@ -32,14 +32,17 @@ class PCQPreprocessedData():
             self.train_idx = split_idx["train"]
             self.valid_idx = split_idx["valid"]
             self.test_idx = split_idx["test-dev"]
+            self.challenge_idx = split_idx["test-challenge"]
         elif self.dataset_name == "PCQM4M-LSC-V2-TOY":
             self.train_idx = split_idx["train"][:5000]
             self.valid_idx = split_idx["valid"]
             self.test_idx = split_idx["test-dev"]
+            self.challenge_idx = split_idx["test-challenge"]
 
         self.dataset_train = self.dataset.index_select(self.train_idx)
         self.dataset_val = self.dataset.index_select(self.valid_idx)
         self.dataset_test = self.dataset.index_select(self.test_idx)
+        self.dataset_challenge = self.dataset.index_select(self.challenge_idx)
 
         self.max_node = 256
         self.multi_hop_max_dist = 5

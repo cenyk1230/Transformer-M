@@ -87,6 +87,8 @@ def eval(args, use_pretrained, checkpoint_path=None, logger=None):
         return auc
     elif args.metric == "mae":
         mae = np.mean(np.abs(y_true.numpy() - y_pred.numpy()))
+        print(str(checkpoint_path)[:-3] + f"_pred_{split}.npy")
+        np.save(str(checkpoint_path)[:-3] + f"_pred_{split}.npy", y_pred.numpy())
         logger.info(f"mae: {mae}")
         return mae
     else:
@@ -100,6 +102,7 @@ def main():
     )
     parser.add_argument(
         "--metric",
+        default="mae",
         type=str,
     )
     args = options.parse_args_and_arch(parser, modify_parser=None)
